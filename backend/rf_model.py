@@ -99,6 +99,17 @@ false_positive_rate, true_positive_rate, threshold = roc_curve(
     y_test, model_2_pred_prob
 )
 
+# feature_importance
+feature_importance = pipeline.named_steps["classifier"].feature_importances_
+
+feature_names = pipeline.named_steps["preprocessor"].get_feature_names_out()
+
+feature_imp_df = pd.DataFrame(
+    {"Feature": feature_names, "Importance": feature_importance}
+)
+
+print(feature_imp_df)
+
 # visual chart for roc_curve using matplotlib
 plt.figure(figsize=(8, 6))
 
